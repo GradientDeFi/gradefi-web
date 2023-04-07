@@ -60,7 +60,6 @@ export default function HomePageMain() {
           height: '100%',
           overflowX: 'hidden',
         }}
-        disableGutters
       >
         <Stack
           direction={{ xs: 'column', md: 'row' }}
