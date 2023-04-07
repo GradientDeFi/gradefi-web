@@ -10,9 +10,9 @@ import {
   getConcurrentMerkleTreeAccountSize,
   ValidDepthSizePair,
 } from '@solana/spl-account-compression'
-import {
-  useCallback, useEffect, useMemo, useState,
-} from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
+import { solanaBaseTxCost } from '@/constants'
 
 const treeNodes = 10_000
 
@@ -68,7 +68,7 @@ async function getCostForAllTrees(connection: Connection, depthPair: ValidDepthS
   let cost = await connection.getMinimumBalanceForRentExemption(requiredSpace)
   cost /= LAMPORTS_PER_SOL // div by lamport exponentiation
   cost /= treeNodes // div by number of nodes to get cost per node (NFT)
-  console.log(cost)
+  cost += solanaBaseTxCost
   return cost
 }
 
