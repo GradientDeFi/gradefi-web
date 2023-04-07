@@ -1,3 +1,12 @@
 # https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
+#User-agent: *
+#Disallow:
+
+# Explicit privileges for social media robots
+#User-agent: facebookexternalhit
+#Allow: /
+
+#User-agent: Twitterbot
+#Allow:
+
+#Sitemap: https://gradefi.com/sitemap.xml
