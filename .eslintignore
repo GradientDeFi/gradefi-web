@@ -1,0 +1,10 @@
+node_modules
+artifacts
+cache
+coverage
+.eslintrc.js
+.babelrc.js
+config-overrides.js
+postcss.config.js
+tailwind.config.js
+*.json

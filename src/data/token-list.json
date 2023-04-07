@@ -1,0 +1,59 @@
+{
+	"_chains": {
+		"1": "Ethereum",
+		"10": "Optimism",
+		"25": "Chronos",
+		"56": "BSC",
+		"137": "Polygon",
+		"250": "Fantom",
+		"288": "Boba",
+		"1088": "Metis",
+		"1284": "Moonbeam",
+		"8217": "Klaytn",
+		"42161": "Arbitrum",
+		"42262": "Oasis Emerald",
+		"43114": "Avalanche"
+	},
+	"ETH": {
+		"name": "Ethereum",
+		"logo": "https://tokens.1inch.io/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+		"tokens": {
+			"wrapped": {
+				"1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+				"10": "0x4200000000000000000000000000000000000006",
+				"25": "0x",
+				"56": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+				"137": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+				"250": "0x"
+			},
+			"wormhole": {
+				"56": "0x4DB5a66E937A9F4473fA95b1cAF1d1E1D62E29EA"
+			},
+			"multichain": {
+				"250": "0x74b23882a30290451A17c44f4F05243b6b58C76d"
+			}
+		}
+	},
+	"BTC": {
+		"name": "Bitcoin",
+		"logo": "https://tokens.1inch.io/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599.png",
+		"tokens": {
+			"wrapped": {
+				"1": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+			},
+			"wormhole": {
+			},
+			"multichain": {
+			}
+		}
+	},
+	"USDC": {
+
+	},
+	"USDT": {
+
+	},
+	"DAI": {
+
+	}
+}
