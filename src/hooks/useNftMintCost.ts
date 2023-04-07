@@ -6,6 +6,7 @@ import {
   EVMGasPrice,
   NativeTokenUsdPrice,
   evmChainNames,
+  EvmChainName,
 } from '@/constants'
 import nftGasCost from '@/data/nft-gas-cost'
 import useEvmProviders from '@/hooks/useEvmProviders'
@@ -57,7 +58,9 @@ export default function useNftMintCost(): AllChainNftMintCost { // cost per mint
 
   useEffect(() => {
     // console.log(baseGas)
-    const evmCosts = evmChainNames.reduce((a, chainName) => ({
+    const evmCosts: {
+      [name in EvmChainName]: { [nftType in NFTTypes]: number }
+    } = evmChainNames.reduce((a, chainName) => ({
       ...a,
       [chainName]: {
         normal: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.normal, nativeTokenPrices),
@@ -83,8 +86,13 @@ export default function useNftMintCost(): AllChainNftMintCost { // cost per mint
 
     // NOTE: ordered list
     setCost({
-      ...evmCosts,
-      ...nonEvmCosts,
+      ethereum: evmCosts.ethereum,
+      polygon: evmCosts.polygon,
+      polygonZKEVM: evmCosts.polygonZKEVM,
+      solanaCompressed: nonEvmCosts.solanaCompressed,
+      solana: nonEvmCosts.solana,
+      avalanche: evmCosts.avalanche,
+      arbitrumOne: evmCosts.arbitrumOne,
     })
   }, [baseGas, nativeTokenPrices, solanaCompressedNormal])
 

@@ -1,10 +1,12 @@
 import ethereumIcon from '@/assets/logo/ethereum/ethereum-icon-color.svg'
 import polygonIcon from '@/assets/logo/polygon/polygon-icon-color.svg'
 import polygonZkEvmIcon from '@/assets/logo/polygon/zkevm-icon-color.png'
+import avalancheIcon from '@/assets/logo/avalanche/avalanche-icon-color.svg'
+import arbitrumIcon from '@/assets/logo/arbitrum/arbitrum-icon-color.svg'
 import solanaIconBlack from '@/assets/logo/solana/solana-icon-black.svg'
 import solanaIconColor from '@/assets/logo/solana/solana-icon-color.svg'
 
-export const evmChainNames = ['ethereum', 'polygon', 'polygonZKEVM'] // 'arbitrum', 'zkSyncEra'
+export const evmChainNames = ['ethereum', 'polygon', 'polygonZKEVM', 'avalanche', 'arbitrumOne'] // 'zkSyncEra'
 
 export const nonEvmChainNames = ['solana', 'solanaCompressed']
 
@@ -44,6 +46,16 @@ export const chainUiKit: ChainDetails = {
   polygonZKEVM: {
     name: 'Polygon zkEVM',
     icon: polygonZkEvmIcon,
+    gasToken: 'ETH',
+  },
+  avalanche: {
+    name: 'Avalanche',
+    icon: avalancheIcon,
+    gasToken: 'AVAX',
+  },
+  arbitrumOne: {
+    name: 'Arbitrum One',
+    icon: arbitrumIcon,
     gasToken: 'ETH',
   },
   solana: {
