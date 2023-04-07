@@ -8,7 +8,7 @@ import {
 import React from 'react'
 
 const navHrefs: { [key: string]: string } = {
-  Github: 'https://github.com/gradefi',
+  Github: 'https://github.com/GradientDeFi',
   // Docs: '/',
   // Twitter: '/',
   '🫡 Jongwon Park': 'https://parkjongwon.com',
