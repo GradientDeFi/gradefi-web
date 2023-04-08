@@ -9,10 +9,7 @@ export default function NftMintCostPageMain() {
 
   return (
     <Container
-      sx={{
-        py: { xs: 3, md: 5 },
-      }}
-      disableGutters
+      sx={{ py: { xs: 3, md: 5 } }}
     >
       <Box>
         <Typography variant="h3" textAlign="center" fontWeight={600} className="text-gray-800">NFT Mint Cost</Typography>
@@ -40,8 +37,18 @@ export default function NftMintCostPageMain() {
           </Typography>
         </Box>
         <Box p={3} className="border-t border-gray-300">
+          <Typography variant="subtitle1" fontWeight={600} className="text-gray-500">Note:</Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            Notice: Base gas prices are fetched from the latest block on each EVM chain, so the displayed minting price could fluctuate from time to time.
+            Base gas prices are fetched from the latest block on each EVM chain, so the displayed minting price could fluctuate from time to time.
+          </Typography>
+        </Box>
+        <Box p={3} className="border-t border-gray-300">
+          <Typography variant="subtitle1" fontWeight={600} className="text-gray-500">Calculation:</Typography>
+          <Typography variant="subtitle1" className="text-gray-500">
+            EVM: 10000 * mint cost per NFT (does not account for contract creation cost)
+          </Typography>
+          <Typography variant="subtitle1" className="text-gray-500">
+            Solana (Compressed): 10000 * mint cost per NFT + compressed Merkle tree initialization
           </Typography>
         </Box>
       </Box>
