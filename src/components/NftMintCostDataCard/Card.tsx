@@ -7,12 +7,13 @@ import React from 'react'
 import { AllChainName, chainUiKit } from '@/constants'
 import { numberFormatter } from '@/utils/number'
 
-export interface DataCardProps {
+export interface NftMintDataCardProps {
   chainName: AllChainName
   cost: number
+  decimal: number
 }
 
-export default function DataCard(props: DataCardProps) {
+export default function NftMintDataCard(props: NftMintDataCardProps) {
   return (
     <Box
       bgcolor="white"
@@ -31,7 +32,7 @@ export default function DataCard(props: DataCardProps) {
             {chainUiKit[props.chainName].name}
           </Typography>
           <Typography variant="h5" fontWeight={600} lineHeight={1.3}>
-            {`${props.cost ? `~${numberFormatter(props.cost)}` : '---'} USD`}
+            {`${props.cost ? `~${numberFormatter(props.cost, props.decimal)}` : '---'} USD`}
           </Typography>
         </Box>
       </Stack>

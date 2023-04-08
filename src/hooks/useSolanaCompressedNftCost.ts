@@ -12,9 +12,7 @@ import {
 } from '@solana/spl-account-compression'
 import { useEffect, useMemo, useState } from 'react'
 
-import { solanaBaseTxCost } from '@/constants'
-
-const treeNodes = 10_000
+import { NftMintAmount, solanaBaseTxCost } from '@/constants'
 
 // make a simple, deduplicated list of the allowed depths
 const allDepthSizes = ALL_DEPTH_SIZE_PAIRS.flatMap(
@@ -30,7 +28,10 @@ const defaultDepthPair: ValidDepthSizePair = {
   maxBufferSize: 8,
 }
 
-function closestTreeData(depthPair: ValidDepthSizePair): { maxDepth: number; maxBufferSize: number; canopyDepth: number } {
+function closestTreeData(
+  treeNodes: NftMintAmount,
+  depthPair: ValidDepthSizePair,
+): { maxDepth: number; maxBufferSize: number; canopyDepth: number } {
   let { maxDepth } = depthPair
   const nodes = parseInt(treeNodes.toString())
   if (!treeNodes || nodes <= 0) return { maxDepth, maxBufferSize: 0, canopyDepth: 0 }
@@ -58,8 +59,13 @@ function closestTreeData(depthPair: ValidDepthSizePair): { maxDepth: number; max
   return { maxDepth, maxBufferSize, canopyDepth }
 }
 
-async function getCostForAllTrees(connection: Connection, depthPair: ValidDepthSizePair) {
-  const treeData = closestTreeData(depthPair)
+async function getCostForAllTrees(
+  connection: Connection,
+  nftMintAmount: NftMintAmount,
+  depthPair: ValidDepthSizePair,
+) {
+  const treeData = closestTreeData(nftMintAmount, depthPair)
+  // console.log(nftMintAmount, treeData)
   const requiredSpace = getConcurrentMerkleTreeAccountSize(
     treeData.maxDepth,
     treeData.maxBufferSize,
@@ -67,19 +73,19 @@ async function getCostForAllTrees(connection: Connection, depthPair: ValidDepthS
   )
   let cost = await connection.getMinimumBalanceForRentExemption(requiredSpace)
   cost /= LAMPORTS_PER_SOL // div by lamport exponentiation
-  cost /= treeNodes // div by number of nodes to get cost per node (NFT)
+  cost /= nftMintAmount // div by number of nodes to get cost per node (NFT)
   cost += solanaBaseTxCost
   return cost
 }
 
-export default function useSolanaCompressedNftCost(): number {
+export default function useSolanaCompressedNftCost(nftMintAmount: NftMintAmount): number {
   const [cost, setCost] = useState<number>(0)
   const connection = useMemo(() => new Connection(clusterApiUrl('devnet')), [])
 
   useEffect(() => {
     if (!connection) return
-    getCostForAllTrees(connection, defaultDepthPair).then(setCost)
-  }, [connection])
+    getCostForAllTrees(connection, nftMintAmount, defaultDepthPair).then(setCost)
+  }, [connection, nftMintAmount])
 
   return cost
 }

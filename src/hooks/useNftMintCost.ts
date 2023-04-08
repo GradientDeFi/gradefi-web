@@ -5,8 +5,8 @@ import {
   AllChainName,
   EVMGasPrice,
   NativeTokenUsdPrice,
+  NftMintAmount,
   evmChainNames,
-  EvmChainName,
 } from '@/constants'
 import nftGasCost from '@/data/nft-gas-cost'
 import useEvmProviders from '@/hooks/useEvmProviders'
@@ -30,13 +30,13 @@ function calcMintGasToUsd(
   return 0
 }
 
-export default function useNftMintCost(): AllChainNftMintCost { // cost per mint
+export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNftMintCost { // cost per mint
   const [baseGas, setBasGas] = useState<EVMGasPrice>(evmChainBaseGasInit)
-  const [cost, setCost] = useState<AllChainNftMintCost>({})
+  const [cost, setCost] = useState<AllChainNftMintCost>([])
 
   const evmProviders = useEvmProviders()
   const nativeTokenPrices = useNativeTokenUsdPrice()
-  const solanaCompressedNormal = useSolanaCompressedNftCost()
+  const solanaCompressedNormal = useSolanaCompressedNftCost(nftMintAmount)
 
   useEffect(() => {
     const promises = evmChainNames.map((chainName) => {
@@ -58,42 +58,38 @@ export default function useNftMintCost(): AllChainNftMintCost { // cost per mint
 
   useEffect(() => {
     // console.log(baseGas)
-    const evmCosts: {
-      [name in EvmChainName]: { [nftType in NFTTypes]: number }
-    } = evmChainNames.reduce((a, chainName) => ({
-      ...a,
-      [chainName]: {
+    const evmCosts: AllChainNftMintCost = evmChainNames.map((chainName) => ({
+      chainName,
+      costs: {
         normal: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.normal, nativeTokenPrices),
         azuki: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.azuki, nativeTokenPrices),
         enumerable: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.enumerable, nativeTokenPrices),
       },
-    }), {})
+    }))
 
     const solanaNormal = calcMintGasToUsd('solana', null, nftGasCost.solana.normal, nativeTokenPrices)
 
-    const nonEvmCosts = {
-      solanaCompressed: {
-        normal: solanaCompressedNormal * nativeTokenPrices.solana,
-        azuki: solanaCompressedNormal * nativeTokenPrices.solana,
-        enumerable: solanaCompressedNormal * nativeTokenPrices.solana,
+    const nonEvmCosts: AllChainNftMintCost = [
+      {
+        chainName: 'solanaCompressed',
+        costs: {
+          normal: solanaCompressedNormal * nativeTokenPrices.solana,
+          azuki: solanaCompressedNormal * nativeTokenPrices.solana,
+          enumerable: solanaCompressedNormal * nativeTokenPrices.solana,
+        },
       },
-      solana: {
-        normal: solanaNormal,
-        azuki: solanaNormal,
-        enumerable: solanaNormal,
+      {
+        chainName: 'solana',
+        costs: {
+          normal: solanaNormal,
+          azuki: solanaNormal,
+          enumerable: solanaNormal,
+        },
       },
-    }
+    ]
 
-    // NOTE: ordered list
-    setCost({
-      ethereum: evmCosts.ethereum,
-      polygon: evmCosts.polygon,
-      polygonZKEVM: evmCosts.polygonZKEVM,
-      solanaCompressed: nonEvmCosts.solanaCompressed,
-      solana: nonEvmCosts.solana,
-      avalanche: evmCosts.avalanche,
-      arbitrumOne: evmCosts.arbitrumOne,
-    })
+    // NOTE: order list by ascending gas price (cheapest first)
+    setCost([...evmCosts, ...nonEvmCosts].sort((a, b) => a.costs.normal - b.costs.normal))
   }, [baseGas, nativeTokenPrices, solanaCompressedNormal])
 
   return cost

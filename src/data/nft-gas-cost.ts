@@ -1,4 +1,4 @@
-import { NFTGasCost } from '@/interfaces/nft'
+import { NftGasCost } from '@/interfaces/nft'
 
 export default {
   //
@@ -17,4 +17,4 @@ export default {
   solana: {
     normal: 0.012, // uncompressed, SOL
   },
-} as NFTGasCost
+} as NftGasCost

@@ -1,5 +1,5 @@
-export function numberFormatter(num: number) {
+export function numberFormatter(num: number, decimal = 0) {
   return new Intl.NumberFormat(undefined, {
-    maximumFractionDigits: 4,
+    maximumFractionDigits: decimal,
   }).format(num)
 }

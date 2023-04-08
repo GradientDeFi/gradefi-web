@@ -1,25 +1,27 @@
 import { Box, Container, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 
+import NftMintAmountSelectors from '@/components/NftMintAmountSelectors'
 import { NftMintCostDataCardGrid } from '@/components/NftMintCostDataCard'
+import { NftMintAmount } from '@/constants'
 import useNftMintCost from '@/hooks/useNftMintCost'
 
 export default function NftMintCostPageMain() {
-  const nftMintCost = useNftMintCost()
+  const [nftMintAmount, setNftMintAmount] = useState<NftMintAmount>(10_000)
+  const nftMintCost = useNftMintCost(nftMintAmount)
 
   return (
-    <Container
-      sx={{ py: { xs: 3, md: 5 } }}
-    >
-      <Box>
-        <Typography variant="h3" textAlign="center" fontWeight={600} className="text-gray-800">NFT Mint Cost</Typography>
-        <Typography variant="subtitle1" textAlign="center" mt={1} className="text-gray-500">
-          How much does it cost to mint 10000 NFTs on different blockchains?
-        </Typography>
-      </Box>
-      <Box my={3}>
-        <NftMintCostDataCardGrid nftMintCost={nftMintCost} />
-      </Box>
+    <Container sx={{ py: { xs: 3, md: 5 } }}>
+      <Typography variant="h3" textAlign="center" fontWeight={600} className="text-gray-800">NFT Mint Cost</Typography>
+      <NftMintAmountSelectors
+        nftMintAmount={nftMintAmount}
+        setNftMintAmount={setNftMintAmount}
+      />
+      <NftMintCostDataCardGrid
+        nftMintCost={nftMintCost}
+        mintAmount={nftMintAmount}
+        sx={{ py: 3 }}
+      />
       <Box
         maxWidth={{ xs: '100%', sm: 800 }}
         mt={7}
@@ -45,10 +47,10 @@ export default function NftMintCostPageMain() {
         <Box p={3} className="border-t border-gray-300">
           <Typography variant="subtitle1" fontWeight={600} className="text-gray-500">Calculation:</Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            EVM: 10000 * mint cost per NFT (does not account for contract creation cost)
+            EVM: # of mints * mint cost per NFT (does not account for contract creation cost)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            Solana (Compressed): 10000 * mint cost per NFT + compressed Merkle tree initialization
+            Solana (Compressed): # of mints * mint cost per NFT + compressed Merkle tree initialization
           </Typography>
         </Box>
       </Box>

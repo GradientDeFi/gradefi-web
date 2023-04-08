@@ -20,8 +20,6 @@ export type AllChainName = EvmChainName | NonEvmChainName
 
 export type EVMGasPrice = { [name in EvmChainName]: number }
 
-export type AllChainNftMintCost = { [name in AllChainName]: { [nftType in NFTTypes]: number } }
-
 export type NativeTokenUsdPrice = { [name in AllChainName]: number }
 
 export interface ChainDetails {

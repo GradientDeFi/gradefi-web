@@ -1,32 +1,34 @@
-import { Stack } from '@mui/material'
+import { Stack, SxProps } from '@mui/material'
 import React, { useEffect } from 'react'
 
 import NftMintCostDataCard from './Card'
-import { AllChainNftMintCost } from '@/constants'
-import { NftMintCost10k } from '@/interfaces/nft'
+import { AllChainNftMintCost, NftMintAmount } from '@/constants'
+import { AllChainSingularNftTypeMintCost } from '@/interfaces/nft'
 
 const nftType: NFTTypes = 'enumerable'
 
 export interface NftMintCostDataCardGridProps {
   nftMintCost: AllChainNftMintCost
+  mintAmount: NftMintAmount
+  sx?: SxProps
 }
 
-export default function NftMintCostDataCardGrid({ nftMintCost }: NftMintCostDataCardGridProps) {
-  const [nftMintCost10k, setNftMintCost10k] = React.useState<NftMintCost10k>({})
+export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, sx }: NftMintCostDataCardGridProps) {
+  const [nftMintCostMultiple, setNftMintCostMultiple] = React.useState<AllChainSingularNftTypeMintCost>([])
 
   useEffect(() => {
     // console.log(nftCost)
     if (!nftMintCost) return
 
-    Object.keys(nftMintCost).forEach((chainName) => {
-      if (!(nftType in nftMintCost[chainName])) return
-      setNftMintCost10k((prev) => ({
-        ...prev,
-        [chainName]: nftMintCost[chainName][nftType] * 10000,
-      }))
-    })
-  }, [nftMintCost])
+    const singularNftTypeMintCost: AllChainSingularNftTypeMintCost = nftMintCost.map((nftCostChain) => ({
+      chainName: nftCostChain.chainName,
+      cost: nftCostChain.costs[nftType] * mintAmount,
+    }))
 
+    setNftMintCostMultiple(singularNftTypeMintCost)
+  }, [mintAmount, nftMintCost])
+
+  // TODO: evaluate using Grid2
   return (
     <Stack
       direction="column"
@@ -35,9 +37,15 @@ export default function NftMintCostDataCardGrid({ nftMintCost }: NftMintCostData
       spacing={2}
       maxWidth={{ xs: '100%', sm: 330 }}
       m="0 auto"
+      sx={sx}
     >
-      {Object.keys(nftMintCost10k).map((chainName) => (
-        <NftMintCostDataCard key={chainName} chainName={chainName} cost={nftMintCost10k[chainName]} />
+      {nftMintCostMultiple.map((nftCostChain) => (
+        <NftMintCostDataCard
+          key={nftCostChain.chainName}
+          chainName={nftCostChain.chainName}
+          cost={nftCostChain.cost}
+          decimal={mintAmount === 10_000 ? 2 : 0}
+        />
       ))}
     </Stack>
   )
