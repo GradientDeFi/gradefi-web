@@ -53,7 +53,9 @@ function closestTreeData(
 
   // canopy depth must not be above 17 or else doesn't work
   const maxCanopyDepth = maxDepth >= 20 ? 17 : maxDepth
-  const canopyDepth = maxCanopyDepth - 3 >= 0 ? maxCanopyDepth - 3 : 0
+
+  // for tree nodes of 2^14 (nearest of 10_000), reduce the canopy depth by 3
+  const canopyDepth = treeNodes !== 10_000 ? maxCanopyDepth : maxCanopyDepth - 3 >= 0 ? maxCanopyDepth - 3 : 0
 
   // finally return the computed closest maxDepth
   return { maxDepth, maxBufferSize, canopyDepth }

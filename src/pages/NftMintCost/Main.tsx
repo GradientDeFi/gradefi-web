@@ -35,7 +35,7 @@ export default function NftMintCostPageMain() {
             For Solana: bare-bone Metaplex NFT (avg. 0.012 SOL per mint)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            For Solana Compressed NFT: Uncompressed equivalent (proof size: 3, depth: 14, leaf: 16384, maxBufferSize: 64, canopyDepth: 11)
+            For Solana Compressed NFT: Uncompressed equivalent (proof size: 3) for both 10,000 and 1,000,000 NFTs
           </Typography>
         </Box>
         <Box p={3} className="border-t border-gray-300">
@@ -50,7 +50,7 @@ export default function NftMintCostPageMain() {
             EVM: # of mints * mint cost per NFT (does not account for contract creation cost)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            Solana (Compressed): # of mints * mint cost per NFT + compressed Merkle tree initialization
+            Solana (Compressed): # of mints * mint cost per NFT (0.000005 SOL) + compressed Merkle tree initialization
           </Typography>
         </Box>
       </Box>
