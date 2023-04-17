@@ -6,6 +6,7 @@ import {
   EVMGasPrice,
   NativeTokenUsdPrice,
   NftMintAmount,
+  evmChainBaseGas,
   evmChainNames,
 } from '@/constants'
 import nftGasCost from '@/data/nft-gas-cost'
@@ -31,7 +32,7 @@ function calcMintGasToUsd(
 }
 
 export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNftMintCost { // cost per mint
-  const [baseGas, setBasGas] = useState<EVMGasPrice>(evmChainBaseGasInit)
+  const [baseGas, setBaseGas] = useState<EVMGasPrice>(evmChainBaseGasInit)
   const [cost, setCost] = useState<AllChainNftMintCost>([])
 
   const evmProviders = useEvmProviders()
@@ -41,15 +42,16 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
   useEffect(() => {
     const promises = evmChainNames.map((chainName) => {
       const provider = evmProviders[chainName]
-      return provider.getGasPrice() // gas price in wei (BigNumber)
-        .then((gasPrice) => Promise.resolve({ [chainName]: gasPrice.toNumber() }))
-        .catch(() => Promise.resolve({ [chainName]: 0 }))
+      // Use default or custom base gas calculator for each chain
+      return evmChainBaseGas[chainName](provider)
+        .then((gasPrice) => Promise.resolve({ [chainName]: gasPrice }))
+        .catch((err) => Promise.resolve({ [chainName]: 0 }))
     })
 
     Promise.all(promises)
       .then((results) => {
         // console.log(results)
-        setBasGas(results.reduce((a, v) => ({ ...a, ...v }), {}))
+        setBaseGas(results.reduce((a, v) => ({ ...a, ...v }), {}))
       })
   }, [evmProviders]) // don't depend on `cost`, otherwise it'll cycle
 
@@ -63,6 +65,7 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
         enumerable: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.enumerable, nativeTokenPrices),
       },
     }))
+    // console.log(evmCosts)
 
     const solanaNormal = calcMintGasToUsd('solana', null, nftGasCost.solana.normal, nativeTokenPrices)
 
