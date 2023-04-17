@@ -43,15 +43,12 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
       const provider = evmProviders[chainName]
       return provider.getGasPrice() // gas price in wei (BigNumber)
         .then((gasPrice) => Promise.resolve({ [chainName]: gasPrice.toNumber() }))
-        .catch((err) => {
-          console.error(err)
-          return Promise.resolve({ [chainName]: 0 })
-        })
+        .catch(() => Promise.resolve({ [chainName]: 0 }))
     })
 
     Promise.all(promises)
       .then((results) => {
-        console.log(results)
+        // console.log(results)
         setBasGas(results.reduce((a, v) => ({ ...a, ...v }), {}))
       })
   }, [evmProviders]) // don't depend on `cost`, otherwise it'll cycle
@@ -89,8 +86,9 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
     ]
 
     // NOTE: order list by ascending gas price (cheapest first)
+    // TODO: guarantee re-order when nftMintAmount changes
     setCost([...evmCosts, ...nonEvmCosts].sort((a, b) => a.costs.normal - b.costs.normal))
-  }, [baseGas, nativeTokenPrices, solanaCompressedNormal])
+  }, [baseGas, nativeTokenPrices, solanaCompressedNormal, nftMintAmount])
 
   return cost
 }

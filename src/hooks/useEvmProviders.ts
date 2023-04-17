@@ -11,6 +11,7 @@ export default function useEvmProviders(): { [name in EvmChainName]: ethers.prov
       polygonZKEVM: new ethers.providers.JsonRpcProvider('https://zkevm-rpc.com'),
       avalanche: new ethers.providers.JsonRpcProvider('https://api.avax.network/ext/bc/C/rpc'),
       arbitrumOne: new ethers.providers.JsonRpcProvider('https://arb1.arbitrum.io/rpc'),
+      optimism: new ethers.providers.JsonRpcProvider('https://mainnet.optimism.io'),
       // zkSyncEra: new ethers.providers.JsonRpcProvider('https://mainnet.era.zksync.io'),
     }),
     [],

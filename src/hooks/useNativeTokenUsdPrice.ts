@@ -37,6 +37,7 @@ export default function useNativeTokenUsdPrice(): NativeTokenUsdPrice {
         polygonZKEVM: feed.ethereum.usd, // zkEVM uses ETH as its gas token
         avalanche: feed['avalanche-2'].usd,
         arbitrumOne: feed.ethereum.usd, // Arbitrum uses ETH as its gas token
+        optimism: feed.ethereum.usd, // Optimism uses ETH as its gas token
       } as NativeTokenUsdPrice))
       .then((tokenPrices) => setPrices(tokenPrices))
       .catch((err) => {
