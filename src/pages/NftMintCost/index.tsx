@@ -2,9 +2,9 @@ import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
-import NFTCostPageMain from '@/pages/NftMintCost/Main'
+import NftCostPageMain from '@/pages/NftMintCost/Main'
 
-function NFTCostPageOutlet() {
+function NftCostPageOutlet() {
   return (
     <>
       <Helmet>
@@ -15,12 +15,12 @@ function NFTCostPageOutlet() {
   )
 }
 
-export default function NFTCostPage() {
+export default function NftCostPage() {
   // /tokenlist
   return (
     <Routes>
-      <Route path="/" element={<NFTCostPageOutlet />}>
-        <Route index path="/" element={<NFTCostPageMain />} />
+      <Route path="/" element={<NftCostPageOutlet />}>
+        <Route index path="/" element={<NftCostPageMain />} />
       </Route>
     </Routes>
   )
