@@ -10,10 +10,11 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 import DynamicHeader from '@/layouts/Header'
 import Footer from '@/layouts/Footer'
 // Outlet pages
+import ExperimentsPage from '@/pages/Experiments'
 import HomePage from '@/pages/Home'
+import NftMintCostPage from '@/pages/NftMintCost'
 import PageNotFoundPage from '@/pages/PageNotFound'
 import TokenListPage from '@/pages/TokenList'
-import NftMintCostPage from '@/pages/NftMintCost'
 
 function AppWrapper({ children }: { children: ReactNode }) {
   return <Box maxWidth="100vw" sx={{ overflowX: 'hidden' }}>{children}</Box>
@@ -38,6 +39,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/tokenlist/*" element={<TokenListPage />} />
             <Route path="/nftcost/*" element={<NftMintCostPage />} />
+            <Route path="/experiments/*" element={<ExperimentsPage />} />
           </Routes>
         </div>
         <Footer />
