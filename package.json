@@ -11,7 +11,7 @@
     "@solana/web3.js": "^1.75.0",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
-    "@wormhole-foundation/wormhole-connect": "^0.0.1-beta.6",
+    "@wormhole-foundation/wormhole-connect": "^0.0.1-beta.7",
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "ethers": "^5",

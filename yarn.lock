@@ -3051,10 +3051,10 @@
     "@webassemblyjs/ast" "1.11.1"
     "@xtuc/long" "4.2.2"
 
-"@wormhole-foundation/wormhole-connect@^0.0.1-beta.6":
-  version "0.0.1-beta.6"
-  resolved "https://registry.yarnpkg.com/@wormhole-foundation/wormhole-connect/-/wormhole-connect-0.0.1-beta.6.tgz#8029136821a841fd88b67ed0b073ed5c9cf95552"
-  integrity sha512-fxwXA+jHtLJwfyXgov8Kv4GtzOwBHYMOYP3kB8RKWUO7iCC9+VxUsPx/AYPJGQNiexgjPIUOUaDInVkVouyyjw==
+"@wormhole-foundation/wormhole-connect@^0.0.1-beta.7":
+  version "0.0.1-beta.7"
+  resolved "https://registry.yarnpkg.com/@wormhole-foundation/wormhole-connect/-/wormhole-connect-0.0.1-beta.7.tgz#59cd430a4184a574030b4aea7e24703421ad6610"
+  integrity sha512-8jqjQB0XTsvmhrGI0Il56uKvEHAqWVQgrcyjCBW0cAhvQV5iECj6cTodhxikiRGMwnqE9bwbKmxeWd6Pnv07jQ==
   dependencies:
     "@mui/material" "^5.12.1"
 
