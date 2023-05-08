@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Stack,
+  SxProps,
   Typography,
 } from '@mui/material'
 
@@ -18,6 +19,7 @@ interface NftMintAmountSelectorProps {
 interface NftMintAmountSelectorsProps {
   nftMintAmount: NftMintAmount
   setNftMintAmount: React.Dispatch<React.SetStateAction<NftMintAmount>>
+  sx?: SxProps
 }
 
 function NftMintAmountSelector({ nftMintAmount, fixMintAmount, setNftMintAmount }: NftMintAmountSelectorProps) {
@@ -33,9 +35,9 @@ function NftMintAmountSelector({ nftMintAmount, fixMintAmount, setNftMintAmount 
   )
 }
 
-export default function NftMintAmountSelectors({ nftMintAmount, setNftMintAmount }: NftMintAmountSelectorsProps) {
+export default function NftMintAmountSelectors({ nftMintAmount, setNftMintAmount, sx }: NftMintAmountSelectorsProps) {
   return (
-    <Box>
+    <Box sx={sx}>
       <Typography variant="subtitle1" textAlign="center" mt={1} className="text-gray-500">
         How much does it cost to mint
         {' '}

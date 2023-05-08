@@ -90,7 +90,8 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
 
     // NOTE: order list by ascending gas price (cheapest first)
     // TODO: guarantee re-order when nftMintAmount changes
-    setCost([...evmCosts, ...nonEvmCosts].sort((a, b) => a.costs.normal - b.costs.normal))
+    // TODO: enumerable to option-selected
+    setCost([...evmCosts, ...nonEvmCosts].sort((a, b) => a.costs.enumerable - b.costs.enumerable))
   }, [baseGas, nativeTokenPrices, solanaCompressedNormal, nftMintAmount])
 
   return cost

@@ -6,7 +6,7 @@ export default function ExperimentsPageMain() {
     <WormholeBridge
       config={{
         env: 'mainnet',
-        //tokens: ['USDCpolygon', 'USDCavax'],
+        // tokens: ['USDCpolygon', 'USDCavax'],
       }}
     />
   )

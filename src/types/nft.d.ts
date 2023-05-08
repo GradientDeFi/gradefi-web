@@ -1,3 +1,3 @@
 type ChainTypes = 'evm' | 'solana'
 
-type NFTTypes = 'normal' | 'azuki' | 'enumerable'
+type NftTypes = 'normal' | 'azuki' | 'enumerable'

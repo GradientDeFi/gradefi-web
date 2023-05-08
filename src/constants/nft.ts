@@ -2,7 +2,7 @@ import { AllChainName } from '@/constants/chains'
 
 export interface AllChainNftMintCostPerChain {
   chainName: AllChainName
-  costs: { [nftType in NFTTypes]: number }
+  costs: { [nftType in NftTypes]: number }
 }
 
 export type AllChainNftMintCost = AllChainNftMintCostPerChain[]

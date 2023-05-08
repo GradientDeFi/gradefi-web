@@ -1,10 +1,15 @@
 import { Box, Container, Typography } from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import React, { useState } from 'react'
 
 import NftMintAmountSelectors from '@/components/NftMintAmountSelectors'
 import { NftMintCostDataCardGrid } from '@/components/NftMintCostDataCard'
+import { NftMintCostGraphAmountPerDollar } from '@/components/NftMintCostGraph'
 import { NftMintAmount } from '@/constants'
 import useNftMintCost from '@/hooks/useNftMintCost'
+
+// TODO: custom type
+const nftType: NftTypes = 'enumerable'
 
 export default function NftMintCostPageMain() {
   const [nftMintAmount, setNftMintAmount] = useState<NftMintAmount>(10_000)
@@ -16,12 +21,24 @@ export default function NftMintCostPageMain() {
       <NftMintAmountSelectors
         nftMintAmount={nftMintAmount}
         setNftMintAmount={setNftMintAmount}
+        sx={{ mb: 4 }}
       />
-      <NftMintCostDataCardGrid
-        nftMintCost={nftMintCost}
-        mintAmount={nftMintAmount}
-        sx={{ py: 3 }}
-      />
+      <Grid container spacing={{ xs: 3, md: 6 }}>
+        <Grid xs={12} md={7}>
+          <NftMintCostDataCardGrid
+            nftMintCost={nftMintCost}
+            mintAmount={nftMintAmount}
+            nftType={nftType}
+          />
+        </Grid>
+        <Grid xs={12} md={5}>
+          <NftMintCostGraphAmountPerDollar
+            nftMintCost={nftMintCost}
+            nftType={nftType}
+            sx={{ maxHeight: 500 }}
+          />
+        </Grid>
+      </Grid>
       <Box
         maxWidth={{ xs: '100%', sm: 800 }}
         mt={7}

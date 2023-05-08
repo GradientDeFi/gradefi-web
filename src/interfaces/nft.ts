@@ -2,19 +2,20 @@ import { AllChainName } from '@/constants'
 
 export interface NftGasCost {
   // [chain in ChainTypes]: {
-  //   [nftType in NFTTypes]: number
+  //   [nftType in NftTypes]: number
   // }
   evm: {
-    [nftType in NFTTypes]: number;
+    [nftType in NftTypes]: number;
   },
   solana: {
-    [nftType in NFTTypes]: number;
+    [nftType in NftTypes]: number;
   }
 }
 
 export interface AllChainSingularNftTypeMintCostPerChain {
   chainName: AllChainName
   cost: number
+  costMultiple: number
 }
 
 export type AllChainSingularNftTypeMintCost = AllChainSingularNftTypeMintCostPerChain[]
