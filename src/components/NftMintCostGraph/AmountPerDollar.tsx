@@ -45,6 +45,14 @@ const options: ChartOptions<'bar'> = {
         family: 'Roboto',
       },
     },
+    tooltip: {
+      titleFont: {
+        size: 14,
+      },
+      bodyFont: {
+        size: 14,
+      },
+    },
   },
   elements: {
     bar: {

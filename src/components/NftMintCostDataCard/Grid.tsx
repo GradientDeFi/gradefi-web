@@ -42,7 +42,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
             <Typography variant="body1" fontWeight={500}>Chain</Typography>
           </StyledTableCell>
           <StyledTableCell align="left">
-            <Typography variant="body1" fontWeight={500}>Cost per NFT</Typography>
+            <Typography variant="body1" fontWeight={500}>1 NFT</Typography>
           </StyledTableCell>
           <StyledTableCell align="right">
             <Typography variant="body1" fontWeight={500}>Total Cost</Typography>
