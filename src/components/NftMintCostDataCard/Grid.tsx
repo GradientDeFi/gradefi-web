@@ -32,7 +32,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
     }))
 
     setNftMintCostMultiple(singularNftTypeMintCost)
-  }, [mintAmount, nftMintCost])
+  }, [mintAmount, nftMintCost, nftType])
 
   return (
     <Table sx={{ maxWidth: '100%' }}>
