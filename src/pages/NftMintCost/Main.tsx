@@ -35,7 +35,7 @@ export default function NftMintCostPageMain() {
           <NftMintCostGraphAmountPerDollar
             nftMintCost={nftMintCost}
             nftType={nftType}
-            sx={{ height: '100%', maxHeight: 500 }}
+            sx={{ height: 500 }}
           />
         </Grid>
       </Grid>

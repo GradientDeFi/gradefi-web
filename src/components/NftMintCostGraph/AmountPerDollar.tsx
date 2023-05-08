@@ -39,6 +39,11 @@ const options: ChartOptions<'bar'> = {
     title: {
       display: true,
       text: 'NFTs Minted per $1',
+      color: '#333',
+      font: {
+        size: 20,
+        family: 'Roboto',
+      },
     },
   },
   elements: {
