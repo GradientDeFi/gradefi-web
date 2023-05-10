@@ -6,7 +6,7 @@ import React from 'react'
 
 import { StyledTableCell, StyledTableRow } from './Styled'
 import { AllChainName, chainUiKit } from '@/constants'
-import { numberFormatter, numberFormatterSig } from '@/utils/number'
+import { formatNumber, formatNumberSig } from '@/utils/number'
 
 export interface NftMintDataCardProps {
   chainName: AllChainName
@@ -34,12 +34,12 @@ export default function NftMintDataCard(props: NftMintDataCardProps) {
       </StyledTableCell>
       <StyledTableCell align="left">
         <Typography variant="h5" fontWeight={600} lineHeight={1.3}>
-          {`${props.cost ? `~$${numberFormatterSig(props.cost, 2)}` : '$--.--'}`}
+          {`${props.cost ? `~$${formatNumberSig(props.cost, 2)}` : '$--.--'}`}
         </Typography>
       </StyledTableCell>
       <StyledTableCell align="right">
         <Typography variant="h5" fontWeight={600} lineHeight={1.3}>
-          {`${props.costMultiple ? `$${numberFormatter(props.costMultiple, props.decimal)}` : '$--.--'}`}
+          {`${props.costMultiple ? `$${formatNumber(props.costMultiple, props.decimal)}` : '$--.--'}`}
         </Typography>
       </StyledTableCell>
     </StyledTableRow>

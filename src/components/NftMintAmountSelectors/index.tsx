@@ -8,7 +8,7 @@ import {
 } from '@mui/material'
 
 import { NftMintAmount } from '@/constants'
-import { numberFormatter } from '@/utils/number'
+import { formatNumber } from '@/utils/number'
 
 interface NftMintAmountSelectorProps {
   nftMintAmount: NftMintAmount
@@ -30,7 +30,7 @@ function NftMintAmountSelector({ nftMintAmount, fixMintAmount, setNftMintAmount 
       size="medium"
       onClick={() => setNftMintAmount(fixMintAmount)}
     >
-      {numberFormatter(fixMintAmount)}
+      {formatNumber(fixMintAmount)}
     </Button>
   )
 }
@@ -41,7 +41,7 @@ export default function NftMintAmountSelectors({ nftMintAmount, setNftMintAmount
       <Typography variant="subtitle1" textAlign="center" mt={1} className="text-gray-500">
         How much does it cost to mint
         {' '}
-        {numberFormatter(nftMintAmount)}
+        {formatNumber(nftMintAmount)}
         {' '}
         NFTs on different blockchains?
       </Typography>
