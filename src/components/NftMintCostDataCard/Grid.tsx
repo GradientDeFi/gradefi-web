@@ -11,6 +11,7 @@ import NftMintCostDataCard from './Card'
 import { StyledTableCell } from './Styled'
 import { AllChainNftMintCost, NftMintAmount } from '@/constants'
 import { AllChainSingularNftTypeMintCost } from '@/interfaces/nft'
+import { formatNumberCompact } from '@/utils/number'
 
 export interface NftMintCostDataCardGridProps {
   nftMintCost: AllChainNftMintCost
@@ -50,7 +51,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
             <Typography variant="body1" fontWeight={500}>1 NFT</Typography>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography variant="body1" fontWeight={500}>Total Cost</Typography>
+            <Typography variant="body1" fontWeight={500}>{`${formatNumberCompact(mintAmount)} NFTs`}</Typography>
           </StyledTableCell>
         </TableRow>
       </TableHead>

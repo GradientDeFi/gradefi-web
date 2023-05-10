@@ -34,7 +34,7 @@ export default function NftMintDataCard(props: NftMintDataCardProps) {
       </StyledTableCell>
       <StyledTableCell align="left">
         <Typography variant="h5" fontWeight={600} lineHeight={1.3}>
-          {`${props.cost ? `$${numberFormatterSig(props.cost, 2)}` : '$--.--'}`}
+          {`${props.cost ? `~$${numberFormatterSig(props.cost, 2)}` : '$--.--'}`}
         </Typography>
       </StyledTableCell>
       <StyledTableCell align="right">
