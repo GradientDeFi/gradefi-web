@@ -5,7 +5,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import NftMintCostDataCard from './Card'
 import { StyledTableCell } from './Styled'
@@ -19,7 +19,11 @@ export interface NftMintCostDataCardGridProps {
 }
 
 export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftType }: NftMintCostDataCardGridProps) {
-  const [nftMintCostMultiple, setNftMintCostMultiple] = React.useState<AllChainSingularNftTypeMintCost>([])
+  const [nftMintCostMultiple, setNftMintCostMultiple] = useState<AllChainSingularNftTypeMintCost>([])
+
+  // Make `decimal` a state so that it updates in sync with the `mintAmount` changes.
+  // This prevents the decimals changing before the values get updated, which causes flashing of value length change on the UI.
+  const [decimal, setDecimal] = useState<number>(2)
 
   useEffect(() => {
     // console.log(nftCost)
@@ -32,6 +36,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
     }))
 
     setNftMintCostMultiple(singularNftTypeMintCost)
+    setDecimal(mintAmount === 10_000 ? 2 : 0)
   }, [mintAmount, nftMintCost, nftType])
 
   return (
@@ -56,7 +61,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
             chainName={nftCostChain.chainName}
             cost={nftCostChain.cost}
             costMultiple={nftCostChain.costMultiple}
-            decimal={mintAmount === 10_000 ? 2 : 0}
+            decimal={decimal}
           />
         ))}
       </TableBody>
