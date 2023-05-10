@@ -17,4 +17,7 @@ export default {
   solana: {
     normal: 0.012, // uncompressed, SOL
   },
+  near: {
+    normal: 0.0007480363880607, // NEP-171 (from nft-gas-cost repo)
+  },
 } as NftGasCost

@@ -6,6 +6,8 @@ import arbitrumIcon from '@/assets/logo/arbitrum/arbitrum-icon-color.png'
 import optimismIcon from '@/assets/logo/optimism/optimism-icon-color.svg'
 import solanaIconBlack from '@/assets/logo/solana/solana-icon-black.svg'
 import solanaIconColor from '@/assets/logo/solana/solana-icon-color.svg'
+import nearIcon from '@/assets/logo/near/near-icon-black.svg'
+import nearAuroraIcon from '@/assets/logo/near-aurora/aurora-icon-color.png'
 
 export const evmChainNames = [
   'ethereum',
@@ -14,10 +16,11 @@ export const evmChainNames = [
   'avalanche',
   'arbitrumOne',
   'optimism',
+  'nearAurora',
   // 'zkSyncEra'
 ]
 
-export const nonEvmChainNames = ['solana', 'solanaCompressed']
+export const nonEvmChainNames = ['solana', 'solanaCompressed', 'near']
 
 export const allChainNames = [...evmChainNames, ...nonEvmChainNames]
 
@@ -88,5 +91,17 @@ export const chainUiKit: ChainDetails = {
     icon: optimismIcon,
     color: '#EA3431',
     gasToken: 'ETH',
+  },
+  nearAurora: {
+    name: 'Aurora',
+    icon: nearAuroraIcon,
+    color: '#5deb5a',
+    gasToken: 'ETH',
+  },
+  near: {
+    name: 'Near',
+    icon: nearIcon,
+    color: '#000000',
+    gasToken: 'NEAR',
   },
 }

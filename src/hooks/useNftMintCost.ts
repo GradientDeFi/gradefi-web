@@ -25,10 +25,7 @@ function calcMintGasToUsd(
   if (evmChainNames.includes(chainName)) {
     return (((baseGasPrice as EVMGasPrice)[chainName] * mintGas) / (10 ** 18)) * prices[chainName]
   }
-  if (chainName === 'solana') {
-    return mintGas * prices.solana
-  }
-  return 0
+  return chainName in prices ? mintGas * prices[chainName] : 0
 }
 
 export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNftMintCost { // cost per mint
@@ -69,6 +66,8 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
 
     const solanaNormal = calcMintGasToUsd('solana', null, nftGasCost.solana.normal, nativeTokenPrices)
 
+    const nearNormal = calcMintGasToUsd('near', null, nftGasCost.near.normal, nativeTokenPrices)
+
     const nonEvmCosts: AllChainNftMintCost = [
       {
         chainName: 'solanaCompressed',
@@ -84,6 +83,14 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
           normal: solanaNormal,
           azuki: solanaNormal,
           enumerable: solanaNormal,
+        },
+      },
+      {
+        chainName: 'near',
+        costs: {
+          normal: nearNormal,
+          azuki: nearNormal,
+          enumerable: nearNormal,
         },
       },
     ]

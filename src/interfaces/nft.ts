@@ -10,6 +10,9 @@ export interface NftGasCost {
   solana: {
     [nftType in NftTypes]: number;
   }
+  near: {
+    [nftType in NftTypes]: number;
+  }
 }
 
 export interface AllChainSingularNftTypeMintCostPerChain {

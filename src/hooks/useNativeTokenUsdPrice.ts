@@ -18,7 +18,7 @@ export default function useCryptoPrice(): { [name in AllChainName]: number } {
 //
 // Using CoinGecko
 //
-const geckoChainIds = ['ethereum', 'solana', 'matic-network', 'avalanche-2']
+const geckoChainIds = ['ethereum', 'solana', 'matic-network', 'avalanche-2', 'near']
 
 type GeckoPriceFeed = { [name in typeof geckoChainIds[number]]: { usd: number } }
 
@@ -38,6 +38,8 @@ export default function useNativeTokenUsdPrice(): NativeTokenUsdPrice {
         avalanche: feed['avalanche-2'].usd,
         arbitrumOne: feed.ethereum.usd, // Arbitrum uses ETH as its gas token
         optimism: feed.ethereum.usd, // Optimism uses ETH as its gas token
+        near: feed.near.usd,
+        nearAurora: feed.ethereum.usd, // Aurora uses ETH as its gas token
       } as NativeTokenUsdPrice))
       .then((tokenPrices) => setPrices(tokenPrices))
       .catch((err) => {
