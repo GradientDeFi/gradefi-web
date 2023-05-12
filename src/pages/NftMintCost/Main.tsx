@@ -80,6 +80,15 @@ export default function NftMintCostPageMain() {
             Solana (Compressed): # of mints * mint cost per NFT (0.000005 SOL) + compressed Merkle tree initialization
           </Typography>
         </Box>
+        <Box p={3} className="border-t border-gray-300">
+          <Typography variant="subtitle1" fontWeight={600} className="text-gray-500">Normalization of Token Price:</Typography>
+          <Typography variant="subtitle1" className="text-gray-500">
+            Gas token prices are normalized to ETH price based on the following formula:
+          </Typography>
+          <Typography variant="subtitle1" className="text-gray-500">
+            <code>Normalized Price = (ETH Market Cap * Gas Token Market Cap) / Gas Token Price</code>
+          </Typography>
+        </Box>
       </Box>
     </Container>
   )
