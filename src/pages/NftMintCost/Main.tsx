@@ -86,7 +86,7 @@ export default function NftMintCostPageMain() {
             Gas token prices are normalized to ETH price based on the following formula:
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            <code>Normalized Price = (ETH Market Cap * Gas Token Market Cap) / Gas Token Price</code>
+            <code>Normalized Price = (ETH Market Cap / Gas Token Market Cap) * Gas Token Price</code>
           </Typography>
         </Box>
       </Box>
