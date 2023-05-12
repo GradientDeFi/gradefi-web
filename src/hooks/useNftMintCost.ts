@@ -4,14 +4,14 @@ import {
   AllChainNftMintCost,
   AllChainName,
   EVMGasPrice,
-  NativeTokenUsdPrice,
   NftMintAmount,
   evmChainBaseGas,
   evmChainNames,
+  AllNativeTokenMarketData,
 } from '@/constants'
 import nftGasCost from '@/data/nft-gas-cost'
 import useEvmProviders from '@/hooks/useEvmProviders'
-import useNativeTokenUsdPrice from '@/hooks/useNativeTokenUsdPrice'
+import useNativeTokenMarketData from '@/hooks/useNativeTokenMarketData'
 import useSolanaCompressedNftCost from '@/hooks/useSolanaCompressedNftCost'
 
 const evmChainBaseGasInit: EVMGasPrice = evmChainNames.reduce((a, v) => ({ ...a, [v]: 0 }), {})
@@ -20,20 +20,27 @@ function calcMintGasToUsd(
   chainName: AllChainName,
   baseGasPrice: EVMGasPrice | null,
   mintGas: number,
-  prices: NativeTokenUsdPrice,
+  marketData: AllNativeTokenMarketData,
+  normalized: boolean,
 ): number {
-  if (evmChainNames.includes(chainName)) {
-    return (((baseGasPrice as EVMGasPrice)[chainName] * mintGas) / (10 ** 18)) * prices[chainName]
+  let price = 0
+  if (chainName in marketData) {
+    price = normalized ? marketData[chainName].priceNormalized : marketData[chainName].price
   }
-  return chainName in prices ? mintGas * prices[chainName] : 0
+
+  if (evmChainNames.includes(chainName)) {
+    return (((baseGasPrice as EVMGasPrice)[chainName] * mintGas) / (10 ** 18)) * price
+  }
+
+  return mintGas * price
 }
 
-export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNftMintCost { // cost per mint
+export default function useNftMintCost(nftMintAmount: NftMintAmount, isPriceNormalized: boolean): AllChainNftMintCost { // cost per mint
   const [baseGas, setBaseGas] = useState<EVMGasPrice>(evmChainBaseGasInit)
   const [cost, setCost] = useState<AllChainNftMintCost>([])
 
   const evmProviders = useEvmProviders()
-  const nativeTokenPrices = useNativeTokenUsdPrice()
+  const nativeTokenData = useNativeTokenMarketData()
   const solanaCompressedNormal = useSolanaCompressedNftCost(nftMintAmount)
 
   useEffect(() => {
@@ -54,27 +61,31 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
 
   useEffect(() => {
     // console.log(baseGas)
+
+    // EVM gas cost to USD conversion
     const evmCosts: AllChainNftMintCost = evmChainNames.map((chainName) => ({
       chainName,
       costs: {
-        normal: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.normal, nativeTokenPrices),
-        azuki: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.azuki, nativeTokenPrices),
-        enumerable: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.enumerable, nativeTokenPrices),
+        normal: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.normal, nativeTokenData, isPriceNormalized),
+        azuki: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.azuki, nativeTokenData, isPriceNormalized),
+        enumerable: calcMintGasToUsd(chainName, baseGas, nftGasCost.evm.enumerable, nativeTokenData, isPriceNormalized),
       },
     }))
     // console.log(evmCosts)
 
-    const solanaNormal = calcMintGasToUsd('solana', null, nftGasCost.solana.normal, nativeTokenPrices)
+    // Non-EVM gas cost to USD conversion
+    const solanaNormal = calcMintGasToUsd('solana', null, nftGasCost.solana.normal, nativeTokenData, isPriceNormalized)
+    const nearNormal = calcMintGasToUsd('near', null, nftGasCost.near.normal, nativeTokenData, isPriceNormalized)
 
-    const nearNormal = calcMintGasToUsd('near', null, nftGasCost.near.normal, nativeTokenPrices)
+    const solanaTokenPrice = nativeTokenData.solana[isPriceNormalized ? 'priceNormalized' : 'price']
 
     const nonEvmCosts: AllChainNftMintCost = [
       {
         chainName: 'solanaCompressed',
         costs: {
-          normal: solanaCompressedNormal * nativeTokenPrices.solana,
-          azuki: solanaCompressedNormal * nativeTokenPrices.solana,
-          enumerable: solanaCompressedNormal * nativeTokenPrices.solana,
+          normal: solanaCompressedNormal * solanaTokenPrice,
+          azuki: solanaCompressedNormal * solanaTokenPrice,
+          enumerable: solanaCompressedNormal * solanaTokenPrice,
         },
       },
       {
@@ -99,7 +110,7 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount): AllChainNf
     // TODO: guarantee re-order when nftMintAmount changes
     // TODO: enumerable to option-selected
     setCost([...evmCosts, ...nonEvmCosts].sort((a, b) => a.costs.enumerable - b.costs.enumerable))
-  }, [baseGas, nativeTokenPrices, solanaCompressedNormal, nftMintAmount])
+  }, [baseGas, nativeTokenData, solanaCompressedNormal, nftMintAmount, isPriceNormalized])
 
   return cost
 }

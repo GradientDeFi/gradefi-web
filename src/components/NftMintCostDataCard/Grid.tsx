@@ -27,8 +27,8 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
   const [decimal, setDecimal] = useState<number>(2)
 
   useEffect(() => {
-    // console.log(nftCost)
     if (!nftMintCost) return
+    // console.log(nftMintCost)
 
     const singularNftTypeMintCost: AllChainSingularNftTypeMintCost = nftMintCost.map((nftCostChain) => ({
       chainName: nftCostChain.chainName,

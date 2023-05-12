@@ -34,7 +34,16 @@ export type AllChainName = EvmChainName | NonEvmChainName
 
 export type EVMGasPrice = { [name in EvmChainName]: number }
 
-export type NativeTokenUsdPrice = { [name in AllChainName]: number }
+export interface NativeTokenMarketData {
+  price: number
+  priceNormalized: number
+  mcap: number
+  fdv: number
+  supplyCirculating: number
+  supplyTotal: number
+}
+
+export type AllNativeTokenMarketData = { [name in AllChainName]: NativeTokenMarketData }
 
 export interface ChainDetails {
   [name: typeof allChainNames[number]]: {

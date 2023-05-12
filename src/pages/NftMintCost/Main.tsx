@@ -7,13 +7,15 @@ import { NftMintCostDataCardGrid } from '@/components/NftMintCostDataCard'
 import { NftMintCostGraphAmountPerDollar } from '@/components/NftMintCostGraph'
 import { NftMintAmount } from '@/constants'
 import useNftMintCost from '@/hooks/useNftMintCost'
+import NftMintGasPriceNormalizeSelectors from '@/components/NftMintGasPriceNormalizeSelectors'
 
 // TODO: custom type
 const nftType: NftTypes = 'enumerable'
 
 export default function NftMintCostPageMain() {
   const [nftMintAmount, setNftMintAmount] = useState<NftMintAmount>(10_000)
-  const nftMintCost = useNftMintCost(nftMintAmount)
+  const [isPriceNormalized, setIsPriceNormalized] = useState<boolean>(false)
+  const nftMintCost = useNftMintCost(nftMintAmount, isPriceNormalized)
 
   return (
     <Container sx={{ py: { xs: 3, md: 5 } }}>
@@ -21,6 +23,11 @@ export default function NftMintCostPageMain() {
       <NftMintAmountSelectors
         nftMintAmount={nftMintAmount}
         setNftMintAmount={setNftMintAmount}
+        sx={{ mb: 1 }}
+      />
+      <NftMintGasPriceNormalizeSelectors
+        isPriceNormalized={isPriceNormalized}
+        setIsPriceNormalized={setIsPriceNormalized}
         sx={{ mb: 4 }}
       />
       <Grid container spacing={{ xs: 3, md: 6 }}>
