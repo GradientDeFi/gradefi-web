@@ -77,7 +77,7 @@ export default function NftMintCostPageMain() {
             EVM, Near: # of mints * mint cost per NFT (does not account for contract creation/store cost)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            Solana (Compressed): # of mints * mint cost per NFT (0.000005 SOL) + compressed Merkle tree initialization
+            Solana Compressed: # of mints * mint cost per NFT (0.000005 SOL) + compressed Merkle tree initialization
           </Typography>
         </Box>
         <Box p={3} className="border-t border-gray-300">

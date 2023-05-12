@@ -86,7 +86,7 @@ export const chainUiKit: ChainDetails = {
     gasToken: 'AVAX',
   },
   arbitrumOne: {
-    name: 'Arbitrum One',
+    name: 'Arbitrum',
     icon: arbitrumIcon,
     color: '#4FA0E8',
     gasToken: 'ETH',
@@ -98,7 +98,7 @@ export const chainUiKit: ChainDetails = {
     gasToken: 'SOL',
   },
   solanaCompressed: {
-    name: 'Solana (Compressed)',
+    name: 'Solana Compressed',
     icon: solanaIconColor,
     color: '#71ECAD',
     gasToken: 'SOL',
