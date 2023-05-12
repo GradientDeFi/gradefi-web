@@ -54,6 +54,9 @@ export default function NftMintCostPageMain() {
           <Typography variant="subtitle1" className="text-gray-500">
             For Solana Compressed NFT: Uncompressed equivalent (proof size: 3) for both 10,000 and 1,000,000 NFTs
           </Typography>
+          <Typography variant="subtitle1" className="text-gray-500">
+            For Near: bare-bone NEP-171
+          </Typography>
         </Box>
         <Box p={3} className="border-t border-gray-300">
           <Typography variant="subtitle1" fontWeight={600} className="text-gray-500">Note:</Typography>
@@ -64,7 +67,7 @@ export default function NftMintCostPageMain() {
         <Box p={3} className="border-t border-gray-300">
           <Typography variant="subtitle1" fontWeight={600} className="text-gray-500">Calculation:</Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            EVM: # of mints * mint cost per NFT (does not account for contract creation cost)
+            EVM, Near: # of mints * mint cost per NFT (does not account for contract creation/store cost)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
             Solana (Compressed): # of mints * mint cost per NFT (0.000005 SOL) + compressed Merkle tree initialization
