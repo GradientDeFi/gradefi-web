@@ -76,6 +76,7 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount, isPriceNorm
     // Non-EVM gas cost to USD conversion
     const solanaNormal = calcMintGasToUsd('solana', null, nftGasCost.solana.normal, nativeTokenData, isPriceNormalized)
     const nearNormal = calcMintGasToUsd('near', null, nftGasCost.near.normal, nativeTokenData, isPriceNormalized)
+    const algorandNormal = calcMintGasToUsd('algorand', null, nftGasCost.algorand.normal, nativeTokenData, isPriceNormalized)
 
     const solanaTokenPrice = nativeTokenData.solana[isPriceNormalized ? 'priceNormalized' : 'price']
 
@@ -102,6 +103,14 @@ export default function useNftMintCost(nftMintAmount: NftMintAmount, isPriceNorm
           normal: nearNormal,
           azuki: nearNormal,
           enumerable: nearNormal,
+        },
+      },
+      {
+        chainName: 'algorand',
+        costs: {
+          normal: algorandNormal,
+          azuki: algorandNormal,
+          enumerable: algorandNormal,
         },
       },
     ]

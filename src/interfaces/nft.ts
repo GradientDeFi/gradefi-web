@@ -13,6 +13,9 @@ export interface NftGasCost {
   near: {
     [nftType in NftTypes]: number;
   }
+  algorand: {
+    [nftType in NftTypes]: number;
+  }
 }
 
 export interface AllChainSingularNftTypeMintCostPerChain {

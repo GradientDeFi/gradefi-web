@@ -53,16 +53,16 @@ export default function NftMintCostPageMain() {
       >
         <Box p={3} className="border-t border-gray-300">
           <Typography variant="subtitle1" className="text-gray-500">
-            For EVMs: avg. 114771 wei per minting of a bare-bone ERC-721Enumerable (by OpenZeppelin)
+            EVMs: avg. 114771 wei per minting of a bare-bone ERC-721Enumerable (by OpenZeppelin)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            For Solana: bare-bone Metaplex NFT (avg. 0.012 SOL per mint)
+            Solana: bare-bone Metaplex NFT (avg. 0.012 SOL per mint)
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            For Solana Compressed NFT: Uncompressed equivalent (proof size: 3) for both 10,000 and 1,000,000 NFTs
+            Solana Compressed NFT: Uncompressed equivalent (proof size: 3) for both 10,000 and 1,000,000 NFTs
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
-            For Near: bare-bone NEP-171
+            Near: bare-bone NEP-171
           </Typography>
         </Box>
         <Box p={3} className="border-t border-gray-300">
@@ -78,6 +78,9 @@ export default function NftMintCostPageMain() {
           </Typography>
           <Typography variant="subtitle1" className="text-gray-500">
             Solana Compressed: # of mints * mint cost per NFT (0.000005 SOL) + compressed Merkle tree initialization
+          </Typography>
+          <Typography variant="subtitle1" className="text-gray-500">
+            Algorand: # of mints * (tx cost + ASA opt-in fee) (tx: 0.001 ALGO; ASA opt-in: 0.1 ALGO)
           </Typography>
         </Box>
         <Box p={3} className="border-t border-gray-300">

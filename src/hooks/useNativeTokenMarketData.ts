@@ -18,7 +18,7 @@ export default function useCryptoPrice(): { [name in AllChainName]: number } {
 //
 // Using CoinGecko
 //
-const geckoChainIds = ['ethereum', 'solana', 'matic-network', 'avalanche-2', 'near', 'binancecoin']
+const geckoChainIds = ['ethereum', 'solana', 'matic-network', 'avalanche-2', 'near', 'binancecoin', 'algorand']
 
 type GeckoTokenMarketDataPartial = {
   id: typeof geckoChainIds[number]
@@ -69,6 +69,7 @@ export default function useNativeTokenMarketData(): AllNativeTokenMarketData {
           optimism: parseGeckoTokenMarketData(feed.ethereum, ethMcap), // Optimism uses ETH as its gas token
           near: parseGeckoTokenMarketData(feed.near, ethMcap),
           nearAurora: parseGeckoTokenMarketData(feed.ethereum, ethMcap), // Aurora uses ETH as its gas token
+          algorand: parseGeckoTokenMarketData(feed.algorand, ethMcap),
         } as AllNativeTokenMarketData
       })
       .then((mdata) => setMarketData(mdata))

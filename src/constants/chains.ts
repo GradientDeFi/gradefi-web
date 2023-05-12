@@ -9,6 +9,7 @@ import solanaIconBlack from '@/assets/logo/solana/solana-icon-black.svg'
 import solanaIconColor from '@/assets/logo/solana/solana-icon-color.svg'
 import nearIcon from '@/assets/logo/near/near-icon-black.svg'
 import nearAuroraIcon from '@/assets/logo/near-aurora/aurora-icon-color.png'
+import algorandIcon from '@/assets/logo/algorand/algorand-icon-black.svg'
 
 export const evmChainNames = [
   'ethereum',
@@ -22,7 +23,7 @@ export const evmChainNames = [
   // 'zkSyncEra'
 ]
 
-export const nonEvmChainNames = ['solana', 'solanaCompressed', 'near']
+export const nonEvmChainNames = ['solana', 'solanaCompressed', 'near', 'algorand']
 
 export const allChainNames = [...evmChainNames, ...nonEvmChainNames]
 
@@ -120,5 +121,11 @@ export const chainUiKit: ChainDetails = {
     icon: nearIcon,
     color: '#000000',
     gasToken: 'NEAR',
+  },
+  algorand: {
+    name: 'Algorand',
+    icon: algorandIcon,
+    color: '#000000',
+    gasToken: 'ALGO',
   },
 }

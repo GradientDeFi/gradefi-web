@@ -20,4 +20,7 @@ export default {
   near: {
     normal: 0.0007480363880607, // NEP-171 (from nft-gas-cost repo)
   },
+  algorand: {
+    normal: 0.101, // ASA opt-in fee is 0.1 ALGO (to receive token) and transfer fee is 0.001 ALGO
+  },
 } as NftGasCost
