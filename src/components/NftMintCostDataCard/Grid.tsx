@@ -24,7 +24,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
 
   // Make `decimal` a state so that it updates in sync with the `mintAmount` changes.
   // This prevents the decimals changing before the values get updated, which causes flashing of value length change on the UI.
-  // const [decimal, setDecimal] = useState<number>(2)
+  const [decimal, setDecimal] = useState<number>(1)
 
   useEffect(() => {
     if (!nftMintCost) return
@@ -37,7 +37,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
     }))
 
     setNftMintCostMultiple(singularNftTypeMintCost)
-    // setDecimal(mintAmount === 10_000 ? 2 : 0)
+    setDecimal(mintAmount === 10_000 ? 1 : 0)
   }, [mintAmount, nftMintCost, nftType])
 
   return (
@@ -62,7 +62,7 @@ export default function NftMintCostDataCardGrid({ nftMintCost, mintAmount, nftTy
             chainName={nftCostChain.chainName}
             cost={nftCostChain.cost}
             costMultiple={nftCostChain.costMultiple}
-            decimal={0} // decimal
+            decimal={decimal}
           />
         ))}
       </TableBody>
