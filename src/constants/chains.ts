@@ -1,6 +1,7 @@
 import ethereumIcon from '@/assets/logo/ethereum/ethereum-icon-color.svg'
 import polygonIcon from '@/assets/logo/polygon/polygon-icon-color.svg'
 import polygonZkEvmIcon from '@/assets/logo/polygon/zkevm-icon-color.png'
+import bnbChainIcon from '@/assets/logo/bnbchain/bnbchain-icon-color.svg'
 import avalancheIcon from '@/assets/logo/avalanche/avalanche-icon-color.svg'
 import arbitrumIcon from '@/assets/logo/arbitrum/arbitrum-icon-color.png'
 import optimismIcon from '@/assets/logo/optimism/optimism-icon-color.svg'
@@ -13,6 +14,7 @@ export const evmChainNames = [
   'ethereum',
   'polygon',
   'polygonZKEVM',
+  'bnbChain',
   'avalanche',
   'arbitrumOne',
   'optimism',
@@ -61,6 +63,12 @@ export const chainUiKit: ChainDetails = {
     icon: polygonZkEvmIcon,
     color: '#7A4ADD',
     gasToken: 'ETH',
+  },
+  bnbChain: {
+    name: 'BNB Chain',
+    icon: bnbChainIcon,
+    color: '#F3BA2F',
+    gasToken: 'BNB',
   },
   avalanche: {
     name: 'Avalanche',
